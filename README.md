@@ -19,7 +19,7 @@ An architect is working on one floor plan. Walls have a thickness and a type. So
 The architect needs three things on one screen:
 
 1. The plan, drawn to scale.
-2. The same walls in volume, so the height of a door or a window is visible. The plan cannot show that.
+2. The same walls in 3D, in the three.js pane under the plan, so the height of a door or a window is visible. The plan cannot show that.
 3. A takeoff: quantities and cost for that plan, and a second saved option beside it.
 
 Changing the plan, the measurement rule, or the price library has to stay understandable. If a number changes, the drawing should show which wall, and why.
@@ -52,14 +52,14 @@ The schema checks shape only. It does not check that an opening fits its wall, a
 ## What the screen has to make clear
 
 - The selected plan, drawn to scale: walls, thickness, openings.
-- The same plan in volume, in the pane under the plan and above the options. Extrude each wall by the storey height and place openings with their sill and height. The shell leaves that pane empty, except Rectangle's south wall, which is finished (thickness side, door, and window) as the pattern. The volume does not compute cost.
+- The same plan in 3D, in the pane under the plan and above the options. That pane is a three.js scene in `frontend/src/components/VolumeView.tsx`, with orbit controls already wired. Stay in that scene. Extrude each wall by the storey height and place openings with their sill and height. Rectangle's south wall is already in the scene (thickness side, door, and window) as the pattern. The other walls are not drawn. The 3D view does not compute cost.
 - Which edge the quantities use (interior face, centreline, or exterior face), visible on the drawing.
 - A cost line and the wall it came from highlight each other.
 - At least two saved options, compared by line and not only by a single total.
 - An opening that does not fit its wall, and a wall whose assembly is missing, are visible on the plan. They are not a silent zero and not a negative area.
 - When the price library changes, a saved option shows which version priced it.
 
-The shell you are given is the frame: plan board, a volume pane, takeoff column, options tray, and a switch between library files. The plan drawing, the rest of the volume, the cost lines, and the options are yours. The library table in the column is the input price list, not a takeoff.
+The shell you are given is the frame: plan board, a three.js volume pane, takeoff column, options tray, and a switch between library files. The plan drawing, the rest of the volume, the cost lines, and the options are yours. The library table in the column is the input price list, not a takeoff.
 
 ## What the server has to own
 
@@ -92,7 +92,7 @@ These files contain walls and openings only. Another tool may later read the sam
 
 ### Not required
 
-Layer-by-layer build-ups, a second storey, editing the plan by dragging, price history, accounts, a walkthrough, or a 3D file separate from the plan. The volume is an extrusion of this plan, not a second model. Build more only if it makes the design note truer, and say what you left out.
+Layer-by-layer build-ups, a second storey, editing the plan by dragging, price history, accounts, a walkthrough, another 3D library, or a 3D file separate from the plan. The volume is a three.js extrusion of this plan, not a second model. Build more only if it makes the design note truer, and say what you left out.
 
 There is no fixed time limit. A senior candidate usually spends somewhere between half a day and a long weekend. Judgement matters more than how much of the roadmap you implement.
 

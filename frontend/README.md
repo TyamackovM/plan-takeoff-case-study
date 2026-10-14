@@ -25,7 +25,7 @@ npm run build
 | Piece | File | What is left |
 | --- | --- | --- |
 | Drawing | `src/components/PlanStage.tsx` | Draw the selected `Plan` to scale |
-| Volume | `src/components/VolumeView.tsx` | One finished wall on Rectangle. The rest of the volume is yours |
+| Volume | `src/components/VolumeView.tsx` | three.js scene. One finished wall on Rectangle. Draw the remaining walls here |
 | Cost lines | `src/components/TakeoffPanel.tsx` | Render the server takeoff, and link a line to a wall |
 | Options | `src/components/OptionsTray.tsx` | List saved options and compare them |
 | HTTP | `src/api.ts` | The calls for the endpoints you add |
