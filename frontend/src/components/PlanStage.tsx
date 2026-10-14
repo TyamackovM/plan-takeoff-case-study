@@ -16,8 +16,8 @@ export function PlanStage({ plan, message }: PlanStageProps) {
               <h1>{plan.name}</h1>
               <p>{plan.description}</p>
               <p className="board-note">
-                Draw this plan to scale. The measurement convention should be readable on the
-                drawing, not only in the cost lines.
+                Draw this plan to scale. The way you measure should be readable on the drawing,
+                not only in the cost lines.
               </p>
             </>
           ) : null}

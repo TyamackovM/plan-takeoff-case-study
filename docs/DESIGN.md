@@ -11,20 +11,20 @@ shape explains the decisions more clearly. We read this before the code.
 What the architect is trying to see, and what your prototype actually shows.
 -->
 
-## Measurement convention
+## How you measure
 
 <!--
-Interior face, centreline, or exterior face. How a corner is owned. Where a
-partition stops. How an opening is deducted. One convention, applied
-everywhere you compute.
+Inner face, centreline, or outer face. How a corner is counted once. Where a
+partition meets an exterior wall. Whether an opening is subtracted from the
+whole wall. One rule, used everywhere you compute.
 -->
 
 ## What is stored, and what is derived
 
 <!--
-Plan, library, quantities, money, option. Which of these is a snapshot, and
-which is recomputed. What a structural tool could consume later without
-reading the cost lines.
+Plan, price library, quantities, cost, saved option. Which of these you store,
+and which you compute again. What a saved option does when the selected
+library changes.
 -->
 
 ## API and schema
@@ -37,8 +37,8 @@ option, and what happens when the library file changes after that.
 ## The screen
 
 <!--
-How the drawing makes the convention and the failures visible. What you
-deliberately did not draw.
+How the drawing shows the way you measure, and how it shows `opening-too-wide`
+and `missing-assembly`. What you deliberately did not draw.
 -->
 
 ## Failures
@@ -57,12 +57,12 @@ The alternatives you considered and did not build.
 ## Tests
 
 <!--
-Which risks the tests lock, and how to run them.
+Which cases the tests cover, and how to run them.
 -->
 
 ## Roadmap
 
 <!--
-Separate the next hardening of this prototype from later product work.
+Separate the next fix to this prototype from later product ideas.
 Say why that order.
 -->

@@ -1,6 +1,6 @@
 # Backend
 
-FastAPI, uv, async psycopg. The process serves the fixture plans and price libraries, and it checks Postgres on `/api/v1/health`. Measurement, pricing, and saved options are not implemented.
+FastAPI, uv, async psycopg. The process serves the plans and price libraries, and it checks Postgres on `/api/v1/health`. Measurement, pricing, and saved options are not implemented.
 
 Run the commands below from this directory. `APP_DATA_DIR` defaults to `../data`, which is correct when the working directory is `backend/`.
 
@@ -28,7 +28,7 @@ OpenAPI: <http://localhost:8000/docs>.
 
 The input models live in `app/schemas.py`. Loading lives in `app/fixtures.py`. `app/takeoff/` is empty.
 
-Startup parses every fixture. A file that does not match the schema stops the process. The schema does not check whether an opening fits its wall, and it does not check whether an assembly id exists. Those cases are in the data on purpose.
+Startup parses every file in `data/`. A file that does not match the schema stops the process. The schema still accepts an opening that does not fit its wall, and an `assembly_id` that is not in the price library. `opening-too-wide` and `missing-assembly` are those plans.
 
 ## Database
 

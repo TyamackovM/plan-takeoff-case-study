@@ -1,6 +1,6 @@
 # Frontend
 
-Vite, React, and TypeScript. The frame of the tool is in place: a plan board, a volume pane, a takeoff column, and an options tray. The board does not draw the plan. The volume pane is a three.js scene with orbit controls. It draws one finished wall, Rectangle's south wall, and nothing else. The column shows the price library it loaded, which is an input, not a takeoff. The options tray is empty.
+Vite, React, and TypeScript. The screen is already split into a plan board, a 3D pane, a takeoff column, and an options area. The board names the selected plan and does not draw the walls. The 3D pane is empty. The column shows the loaded price library under the heading Price library. That table is input. The quantity and cost lines above it are empty. The options area is empty.
 
 The task, including what the screen has to make visible, is in the [root README](../README.md).
 
@@ -25,7 +25,7 @@ npm run build
 | Piece | File | What is left |
 | --- | --- | --- |
 | Drawing | `src/components/PlanStage.tsx` | Draw the selected `Plan` to scale |
-| Volume | `src/components/VolumeView.tsx` | three.js scene. One finished wall on Rectangle. Draw the remaining walls here |
+| 3D | `src/components/VolumeView.tsx` | Draw the selected plan in 3D |
 | Cost lines | `src/components/TakeoffPanel.tsx` | Render the server takeoff, and link a line to a wall |
 | Options | `src/components/OptionsTray.tsx` | List saved options and compare them |
 | HTTP | `src/api.ts` | The calls for the endpoints you add |

@@ -1,8 +1,7 @@
 """Input models for plans and price libraries.
 
 The schema checks shape. It does not decide how to measure a wall, and it does
-not reject the awkward files in ``data/plans`` (an opening that does not fit,
-an assembly id the library does not contain).
+not reject ``opening-too-wide`` or ``missing-assembly``.
 """
 
 from typing import Literal, Self
