@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "id": "l-plan",
+  "name": "L plan",
+  "description": "Single-storey L. The exterior turns inward at (6, 4). No partition.",
+  "units": "m",
+  "storey": {
+    "id": "ground",
+    "height_m": 3,
+    "walls": [
+      {
+        "id": "ext-south",
+        "assembly_id": "external-wall",
+        "baseline": [[0, 0], [10, 0]],
+        "thickness_m": 0.3,
+        "thickness_side": "right",
+        "openings": [
+          {
+            "id": "door-1",
+            "kind": "door",
+            "along_m": 2,
+            "width_m": 0.9,
+            "height_m": 2.1,
+            "sill_m": 0
+          }
+        ]
+      },
+      {
+        "id": "ext-east",
+        "assembly_id": "external-wall",
+        "baseline": [[10, 0], [10, 4]],
+        "thickness_m": 0.3,
+        "thickness_side": "right",
+        "openings": []
+      },
+      {
+        "id": "ext-east-wing-north",
+        "assembly_id": "external-wall",
+        "baseline": [[10, 4], [6, 4]],
+        "thickness_m": 0.3,
+        "thickness_side": "right",
+        "openings": []
+      },
+      {
+        "id": "ext-north-wing-east",
+        "assembly_id": "external-wall",
+        "baseline": [[6, 4], [6, 8]],
+        "thickness_m": 0.3,
+        "thickness_side": "right",
+        "openings": []
+      },
+      {
+        "id": "ext-north",
+        "assembly_id": "external-wall",
+        "baseline": [[6, 8], [0, 8]],
+        "thickness_m": 0.3,
+        "thickness_side": "right",
+        "openings": []
+      },
+      {
+        "id": "ext-west",
+        "assembly_id": "external-wall",
+        "baseline": [[0, 8], [0, 0]],
+        "thickness_m": 0.3,
+        "thickness_side": "right",
+        "openings": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "id": "opening-too-wide",
+  "name": "Opening too wide",
+  "description": "Rectangle plan whose south window is wider than the wall.",
+  "units": "m",
+  "storey": {
+    "id": "ground",
+    "height_m": 3,
+    "walls": [
+      {
+        "id": "ext-south",
+        "assembly_id": "external-wall",
+        "baseline": [[0, 0], [10, 0]],
+        "thickness_m": 0.3,
+        "thickness_side": "right",
+        "openings": [
+          {
+            "id": "window-1",
+            "kind": "window",
+            "along_m": 0,
+            "width_m": 12,
+            "height_m": 1.5,
+            "sill_m": 0.9
+          }
+        ]
+      },
+      {
+        "id": "ext-east",
+        "assembly_id": "external-wall",
+        "baseline": [[10, 0], [10, 8]],
+        "thickness_m": 0.3,
+        "thickness_side": "right",
+        "openings": []
+      },
+      {
+        "id": "ext-north",
+        "assembly_id": "external-wall",
+        "baseline": [[10, 8], [0, 8]],
+        "thickness_m": 0.3,
+        "thickness_side": "right",
+        "openings": []
+      },
+      {
+        "id": "ext-west",
+        "assembly_id": "external-wall",
+        "baseline": [[0, 8], [0, 0]],
+        "thickness_m": 0.3,
+        "thickness_side": "right",
+        "openings": []
+      },
+      {
+        "id": "part-1",
+        "assembly_id": "internal-partition",
+        "baseline": [[6, 0], [6, 8]],
+        "thickness_m": 0.1,
+        "thickness_side": "right",
+        "openings": []
+      }
+    ]
+  }
+}

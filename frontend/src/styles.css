@@ -1,0 +1,280 @@
+:root {
+  color-scheme: light;
+  --ink: #1c1d1f;
+  --muted: #5c6168;
+  --line: #d9dce1;
+  --canvas: #f7f6f3;
+  --panel: #ffffff;
+  --chrome: #eef0f3;
+  --accent: #0f6e56;
+  --accent-ink: #ffffff;
+  --danger: #8d2d2d;
+  --grid: rgb(28 29 31 / 6%);
+  font-family: system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--chrome);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.app {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.brand-mark {
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+}
+
+.brand-name {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.plan-switch,
+.choice-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.library-switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.switch-label {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.choice {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 13px;
+}
+
+.choice[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  min-height: 0;
+}
+
+.stage {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) 168px;
+  min-height: 0;
+}
+
+.plan-stage,
+.options,
+.takeoff {
+  min-height: 0;
+  min-width: 0;
+}
+
+.board {
+  height: 100%;
+  background-color: var(--canvas);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+}
+
+.board-copy {
+  max-width: 420px;
+  text-align: center;
+}
+
+.board-copy h1 {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.board-copy p,
+.empty,
+.panel-message,
+.board-message {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+  font-size: 14px;
+}
+
+.board-note {
+  margin-top: 12px;
+}
+
+.board-message {
+  color: var(--danger);
+}
+
+.options {
+  border-top: 1px solid var(--line);
+  background: var(--panel);
+  padding: 0 16px 16px;
+  overflow: auto;
+}
+
+.takeoff {
+  border-left: 1px solid var(--line);
+  background: var(--panel);
+  overflow: auto;
+}
+
+.panel-header {
+  padding: 14px 16px 0;
+}
+
+.options .panel-header {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.panel-header h2 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.panel-block,
+.options .empty {
+  padding: 10px 16px 16px;
+}
+
+.options .empty {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.rates {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.rates caption {
+  caption-side: bottom;
+  text-align: left;
+  color: var(--muted);
+  font-size: 12px;
+  padding-top: 8px;
+}
+
+.rates th,
+.rates td {
+  text-align: left;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line);
+  font-weight: 400;
+}
+
+.rates td {
+  text-align: right;
+}
+
+.statusbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 16px;
+  border-top: 1px solid var(--line);
+  background: var(--chrome);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.text-button {
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  padding: 0;
+  font-size: 12px;
+}
+
+@media (max-width: 800px) {
+  .workspace,
+  .stage {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(280px, 1fr) auto auto;
+  }
+
+  .stage {
+    grid-template-rows: minmax(280px, 1fr) auto;
+  }
+
+  .takeoff {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .library-switch {
+    margin-left: 0;
+  }
+
+  .topbar {
+    flex-wrap: wrap;
+  }
+}

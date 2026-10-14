@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "version": "v2",
+  "currency": "CRD",
+  "assemblies": [
+    {
+      "id": "external-wall",
+      "name": "External wall",
+      "category": "wall",
+      "unit": "m2",
+      "rate": 240
+    },
+    {
+      "id": "internal-partition",
+      "name": "Internal partition",
+      "category": "wall",
+      "unit": "m2",
+      "rate": 75
+    },
+    {
+      "id": "ground-slab",
+      "name": "Ground slab",
+      "category": "slab",
+      "unit": "m2",
+      "rate": 150
+    },
+    {
+      "id": "roof",
+      "name": "Roof",
+      "category": "roof",
+      "unit": "m2",
+      "rate": 90
+    }
+  ]
+}

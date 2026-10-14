@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "id": "missing-assembly",
+  "name": "Missing assembly",
+  "description": "One wall. Its assembly_id is not in the price library.",
+  "units": "m",
+  "storey": {
+    "id": "ground",
+    "height_m": 3,
+    "walls": [
+      {
+        "id": "ext-south",
+        "assembly_id": "not-in-library",
+        "baseline": [[0, 0], [4, 0]],
+        "thickness_m": 0.3,
+        "thickness_side": "right",
+        "openings": []
+      }
+    ]
+  }
+}
