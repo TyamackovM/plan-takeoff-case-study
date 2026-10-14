@@ -10,29 +10,56 @@ You may use AI tools. We grade the decisions in the design note, the behaviour o
 
 ---
 
-## The situation
+Read it in this order: the screen, the input files, what to build, what to leave out, then how to run and hand it back.
 
-An architect is working in plan. Walls have a thickness and a type. Some walls have doors and windows. A price library lists assemblies in credits per square metre (`CRD` — a unit for this exercise, not a real currency).
+## The screen
 
-The architect needs two things on one screen:
+An architect is working on one floor plan. Walls have a thickness and a type. Some walls have doors and windows. A price library lists assemblies in credits per square metre (`CRD` — a unit for this exercise, not a real currency).
+
+The architect needs three things on one screen:
 
 1. The plan, drawn to scale.
-2. A takeoff: quantities and cost for that plan, and a second saved option beside it.
+2. The same walls in volume, so the height of a door or a window is visible. The plan cannot show that.
+3. A takeoff: quantities and cost for that plan, and a second saved option beside it.
 
-Changing the plan, the measurement rule, or the price library has to stay understandable. If a number changes, the drawing should show why.
+Changing the plan, the measurement rule, or the price library has to stay understandable. If a number changes, the drawing should show which wall, and why.
 
-A structural tool will later consume the same plan. It is not part of this prototype. Do not design the data so that columns and beams have to live inside the cost lines. Say, in the design note, what you would hand that tool.
+## The input
+
+Plans and price libraries live in [`data/`](data/README.md). Coordinates are metres. In the plan, `Y` increases upward. The pictures of each plan are in that file. The field names below are the ones you meet in the JSON.
+
+A wall is one straight segment.
+
+- `baseline` is the segment from the first point to the second. On the exterior walls in these files that line is the inner face. The square where two exterior walls meet belongs to neither wall.
+- `thickness_m` is how far the wall material extends off that line. `thickness_side` is `left` or `right` of the direction you walk the baseline, from the first point toward the second. On these exterior walls `right` is the outer side. The field is already set; you do not have to guess it.
+- An opening sits on that wall. `along_m` is how far its start is from the first baseline point, measured along the wall. `width_m` continues in that same direction. `height_m` and `sill_m` go up from the floor. They do not appear in the plan view. `sill_m` is `0` for a door.
+
+On Rectangle, `ext-south` runs from `(0, 0)` to `(10, 0)`. Its door has `along_m` 1.5 and `width_m` 0.9, so the opening occupies 1.5 m to 2.4 m along that wall, and rises 2.1 m from the floor.
+
+The schema checks shape only. It does not check that an opening fits its wall, and it does not check that `assembly_id` is in the library. Two plans are awkward on purpose: `opening-too-wide` and `missing-assembly`.
+
+`ground-slab` and `roof` have rates and no elements in the plans. Whether the estimate includes them is your decision.
+
+| File | Role |
+| --- | --- |
+| `data/plans/rectangle.json` | Ordinary plan. Start here. |
+| `data/plans/l-plan.json` | Exterior that turns inward. |
+| `data/plans/opening-too-wide.json` | An opening that does not fit its wall. |
+| `data/plans/missing-assembly.json` | A wall type the library does not contain. |
+| `data/library/assemblies.json` | Price library `v1`. |
+| `data/library/assemblies-v2.json` | Price library `v2`. Same assemblies. The external-wall rate differs. |
 
 ## What the screen has to make clear
 
 - The selected plan, drawn to scale: walls, thickness, openings.
+- The same plan in volume, in the pane under the plan and above the options. Extrude each wall by the storey height and place openings with their sill and height. The shell leaves that pane empty, except Rectangle's south wall, which is finished (thickness side, door, and window) as the pattern. The volume does not compute cost.
 - Which edge the quantities use (interior face, centreline, or exterior face), visible on the drawing.
 - A cost line and the wall it came from highlight each other.
 - At least two saved options, compared by line and not only by a single total.
 - An opening that does not fit its wall, and a wall whose assembly is missing, are visible on the plan. They are not a silent zero and not a negative area.
 - When the price library changes, a saved option shows which version priced it.
 
-The shell you are given is the frame: plan board, takeoff column, options tray, and a switch between library files. The drawing, the cost lines, and the options are yours. The library table in the column is the input price list, not a takeoff.
+The shell you are given is the frame: plan board, a volume pane, takeoff column, options tray, and a switch between library files. The plan drawing, the rest of the volume, the cost lines, and the options are yours. The library table in the column is the input price list, not a takeoff.
 
 ## What the server has to own
 
@@ -43,11 +70,15 @@ The shell you are given is the frame: plan board, takeoff column, options tray, 
 
 The browser reaches the API through the Vite dev server, which proxies `/api` to the backend. OpenAPI for the backend is at <http://localhost:8000/docs>.
 
+## A later reader
+
+These files contain walls and openings only. Another tool may later read the same plan. You do not build that tool, and you do not add structure that is not in the files. Keep the wall geometry independent of the priced lines, so that reader can use the plan without parsing your cost table. In the design note, name the fields you would pass across.
+
 ## Deliverables
 
 1. **Design note** — [`docs/DESIGN.md`](docs/DESIGN.md). Interpretation, measurement convention, what is stored and what is derived, API, how the drawing explains the numbers, failure cases, trade-offs, and a roadmap. The template is a guide. Change it if another shape is clearer.
 2. **Prototype** — the screen and the server behaviour above, plus tests. We do not prescribe the component structure, the endpoint shapes, or a coverage percentage.
-3. **Roadmap** — in the same note. Separate what you would harden next from product ideas. The structural tool belongs here unless a small part of it is necessary to defend the boundary you chose.
+3. **Roadmap** — in the same note. Separate what you would harden next from product ideas. A later reader of this plan belongs here.
 
 ### Worth deciding, and writing down
 
@@ -61,29 +92,16 @@ The browser reaches the API through the Vite dev server, which proxies `/api` to
 
 ### Not required
 
-Layer-by-layer build-ups, a second storey, columns and beams, editing the plan by dragging, price history, IFC, accounts, three-dimensional navigation. Build one of these only if it makes the design note truer, and say what you left out.
+Layer-by-layer build-ups, a second storey, editing the plan by dragging, price history, accounts, a walkthrough, or a 3D file separate from the plan. The volume is an extrusion of this plan, not a second model. Build more only if it makes the design note truer, and say what you left out.
 
 There is no fixed time limit. A senior candidate usually spends somewhere between half a day and a long weekend. Judgement matters more than how much of the roadmap you implement.
-
-## Sample data
-
-The files are the contract. Descriptions are hints. Coordinates win. Details are in [`data/README.md`](data/README.md).
-
-| File | Role |
-| --- | --- |
-| `data/plans/rectangle.json` | Ordinary plan. Start here. |
-| `data/plans/l-plan.json` | Exterior that turns inward. |
-| `data/plans/opening-too-wide.json` | An opening that does not fit its wall. |
-| `data/plans/missing-assembly.json` | A wall type the library does not contain. |
-| `data/library/assemblies.json` | Price library `v1`. |
-| `data/library/assemblies-v2.json` | Price library `v2`. Same assemblies. The external-wall rate differs. |
 
 ## Repo layout
 
 ```
 .
 ├── backend/          FastAPI. Health, plans, and libraries. Takeoff is empty.
-├── frontend/         Vite + React. Tool frame. Drawing and options are empty.
+├── frontend/         Vite + React. Plan board, volume pane, takeoff column, options tray.
 ├── data/             Plans and price libraries
 ├── docs/DESIGN.md    Design-note template
 ├── docker-compose.yml

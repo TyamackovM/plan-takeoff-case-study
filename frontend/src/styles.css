@@ -115,15 +115,43 @@ button {
 
 .stage {
   display: grid;
-  grid-template-rows: minmax(0, 1fr) 168px;
+  grid-template-rows: minmax(0, 1fr) 280px 168px;
   min-height: 0;
 }
 
 .plan-stage,
+.volume,
 .options,
 .takeoff {
   min-height: 0;
   min-width: 0;
+}
+
+.volume {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  border-top: 1px solid var(--line);
+  background: #e6e2d8;
+  overflow: hidden;
+}
+
+.volume-caption {
+  margin: 0;
+  padding: 8px 16px 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.volume-frame {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.volume-frame canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .board {
@@ -255,14 +283,13 @@ button {
 }
 
 @media (max-width: 800px) {
-  .workspace,
-  .stage {
+  .workspace {
     grid-template-columns: 1fr;
-    grid-template-rows: minmax(280px, 1fr) auto auto;
+    grid-template-rows: auto auto;
   }
 
   .stage {
-    grid-template-rows: minmax(280px, 1fr) auto;
+    grid-template-rows: minmax(220px, 50vh) 240px auto;
   }
 
   .takeoff {

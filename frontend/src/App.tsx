@@ -4,6 +4,7 @@ import { OptionsTray } from "./components/OptionsTray.tsx";
 import { PlanStage } from "./components/PlanStage.tsx";
 import { StatusBar } from "./components/StatusBar.tsx";
 import { TakeoffPanel } from "./components/TakeoffPanel.tsx";
+import { VolumeView } from "./components/VolumeView.tsx";
 import { TopBar } from "./components/TopBar.tsx";
 import type { Health, Library, LibrarySummary, Plan, PlanSummary, RequestState } from "./types.ts";
 
@@ -136,6 +137,7 @@ export default function App() {
       <div className="workspace">
         <div className="stage">
           <PlanStage plan={plan.status === "ready" ? plan.data : null} message={planMessage} />
+          <VolumeView plan={plan.status === "ready" ? plan.data : null} />
           <OptionsTray />
         </div>
         <TakeoffPanel library={library.status === "ready" ? library.data : null} message={libraryMessage} />
